@@ -6,11 +6,12 @@
 
 from gpiozero import LED
 from time import sleep
+from tkinter import *
 red = LED(25)
 
 if __name__ == '__main__':
-    while True:
-        red.on()
-        sleep(1)
-        red.off()
-        sleep(1)
+    window = Tk()
+    window.title('LED Control')
+    window.geometry("300x200")
+    window.option_add("*Font",('verdana', 18, 'bold'))
+    window.mainloop()
