@@ -13,16 +13,22 @@ class App:
     def __init__(self,window):
         #建立gpiozero led
         self.red = LED(25)
-        print("init")
+
 
         #建立window and Layout
+        self.buttonName = StringVar()
         mainFrame = Frame(window, borderwidth=2, relief=GROOVE)
-        self.button = Button(mainFrame,text="開燈",command=self.callback)
-        self.button.pack(expand=YES, fill=BOTH, padx=40, pady=25)
+        Button(mainFrame,textvariable=self.buttonName,command=self.callback).pack(expand=YES, fill=BOTH, padx=40, pady=25)
+        self.buttonName.set("開燈")
         mainFrame.pack(expand=YES,fill=BOTH, padx=5, pady=20)
 
+        #firebase
+
     def callback(self):
-        print("Click!")
+        if self.buttonName.get() == '開燈':
+            self.buttonName.set('關燈')
+        else:
+            self.buttonName.set('開燈')
 
 
 if __name__ == '__main__':
