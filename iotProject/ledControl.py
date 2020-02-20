@@ -27,8 +27,10 @@ class App:
     def callback(self):
         if self.buttonName.get() == '開燈':
             self.buttonName.set('關燈')
+            self.red.on()
         else:
             self.buttonName.set('開燈')
+            self.red.off()
 
 
 if __name__ == '__main__':
