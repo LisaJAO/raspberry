@@ -7,6 +7,8 @@
 from gpiozero import LED
 from time import sleep
 from tkinter import *
+import firebase_admin
+from firebase_admin import credentials
 
 
 class App:
@@ -22,7 +24,9 @@ class App:
         self.buttonName.set("開燈")
         mainFrame.pack(expand=YES,fill=BOTH, padx=5, pady=20)
 
-        #firebase
+        #firebase init
+        cred = credentials.Certificate("/home/pi/Documents/certificate/raspberryfirebase-firebase-adminsdk-y4f0x-cf4be2ca1a.json")
+        firebase_admin.initialize_app(cred)
 
     def callback(self):
         if self.buttonName.get() == '開燈':
