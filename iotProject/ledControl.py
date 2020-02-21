@@ -3,7 +3,7 @@
 '''
 控制Led
 '''
-
+from firebase_admin.exceptions import FirebaseError
 from gpiozero import LED
 from time import sleep
 from tkinter import *
@@ -33,13 +33,19 @@ class App:
 
         self.ledNote = db.reference('/iot20191126/ledState')
         #register listen self.ledNote changeEvent
-        self.ledNote.listen(self.valueChangeLister)
+        try:
+            self.ledNote.listen(self.valueChangeLister)
+        except FirebaseError:
+            print("listen Error")
 
     def callback(self):
-        if self.buttonName.get() == '開燈':
-            self.ledNote.set(True)
-        else:
-            self.ledNote.set(False)
+        try:
+            if self.buttonName.get() == '開燈':
+                self.ledNote.set(True)
+            else:
+                self.ledNote.set(False)
+        except:
+            print("firebase Error")
 
     def valueChangeLister(self,event):
         '''
