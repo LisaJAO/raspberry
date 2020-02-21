@@ -22,7 +22,7 @@ class App:
         self.buttonName = StringVar()
         mainFrame = Frame(window, borderwidth=2, relief=GROOVE)
         Button(mainFrame,textvariable=self.buttonName,command=self.callback).pack(expand=YES, fill=BOTH, padx=40, pady=25)
-        self.buttonName.set("開燈")
+
         mainFrame.pack(expand=YES,fill=BOTH, padx=5, pady=20)
 
         #firebase init
@@ -32,17 +32,31 @@ class App:
         })
 
         self.ledNote = db.reference('/iot20191126/ledState')
-        print(self.ledNote.get())
+        #register listen self.ledNote changeEvent
+        self.ledNote.listen(self.valueChangeLister)
 
     def callback(self):
         if self.buttonName.get() == '開燈':
-            self.buttonName.set('關燈')
-            self.red.on()
             self.ledNote.set(True)
         else:
-            self.buttonName.set('開燈')
-            self.red.off()
             self.ledNote.set(False)
+
+    def valueChangeLister(self,event):
+        '''
+        print(event)
+        print(event.data)
+        print(event.path)
+        print(event.event_type)
+        print(self.ledNote.get())
+        '''
+        if event.data:
+            self.red.on()
+            self.buttonName.set("關燈")
+        else:
+            self.red.off()
+            self.buttonName.set("開燈")
+
+
 
 
 if __name__ == '__main__':
