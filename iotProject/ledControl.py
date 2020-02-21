@@ -9,6 +9,7 @@ from time import sleep
 from tkinter import *
 import firebase_admin
 from firebase_admin import credentials
+from firebase_admin import db
 
 
 class App:
@@ -26,7 +27,12 @@ class App:
 
         #firebase init
         cred = credentials.Certificate("/home/pi/Documents/certificate/raspberryfirebase-firebase-adminsdk-y4f0x-cf4be2ca1a.json")
-        firebase_admin.initialize_app(cred)
+        firebase_admin.initialize_app(cred, {
+            'databaseURL': 'https://raspberryfirebase.firebaseio.com/'
+        })
+
+        self.ledNote = db.reference('/iot20191126/ledState')
+        print(self.ledNote.get())
 
     def callback(self):
         if self.buttonName.get() == '開燈':
