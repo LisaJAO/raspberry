@@ -38,9 +38,11 @@ class App:
         if self.buttonName.get() == '開燈':
             self.buttonName.set('關燈')
             self.red.on()
+            self.ledNote.set(True)
         else:
             self.buttonName.set('開燈')
             self.red.off()
+            self.ledNote.set(False)
 
 
 if __name__ == '__main__':
