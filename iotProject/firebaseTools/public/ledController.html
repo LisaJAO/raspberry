@@ -26,6 +26,8 @@
             text-align: center;
         }
 
+
+
     </style>
     <title>LED 控制台</title>
 </head>
@@ -59,7 +61,7 @@
         <h1 class="display-4">客廳燈狀態</h1>
         <p class="lead">透過Firebase及時顯示燈狀態 </p>
         <hr class="my-4">
-        <button class="btn btn-primary btn-lg state" id="btn">目前燈狀態:關</button>
+        <button class="btn btn-primary btn-lg state" id="btnState">目前燈狀態:關</button>
     </div>
 </div>
 
@@ -74,5 +76,16 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+<script>
+
+    $(document).ready(function(){
+        //處理btn的狀態
+        var $btnState = $("#btnState")
+        if ($btnState.hasClass("btn-primary")){
+            console.log("has btn-primary")
+        }
+    });
+
+</script>
 </body>
 </html>
