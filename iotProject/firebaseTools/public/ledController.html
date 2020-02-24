@@ -66,6 +66,22 @@
 </div>
 
 <!-- Optional JavaScript -->
+<!--Firebase console-->
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAHgSjntOofP5uFmmkHLTmuyCsS3f9OeSc",
+    authDomain: "raspberryfirebase.firebaseapp.com",
+    databaseURL: "https://raspberryfirebase.firebaseio.com",
+    projectId: "raspberryfirebase",
+    storageBucket: "raspberryfirebase.appspot.com",
+    messagingSenderId: "929629322713",
+    appId: "1:929629322713:web:f46ba539fe32c1868eedc8"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
