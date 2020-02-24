@@ -11,13 +11,25 @@
     <style type="text/css">
         button.state {
             font-size: 2em;
-            font-family: 微軟正黑體,Arial;
+            font-family: 微軟正黑體, Arial;
         }
+        /*
+        .container {
+            width: 100%;
+            padding-right: 0px;
+            padding-left: 0px;
+            margin-right: 0px;
+            margin-left: 0px;
+        }
+        */
+
     </style>
     <title>LED 控制台</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+<div class="container" style="text-align: center">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand h1 " href="#">2019Iot物聯網</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,12 +52,14 @@
 
     </div>
 </nav>
-<div class="jumbotron">
-    <h1 class="display-4">客廳燈狀態</h1>
-    <p class="lead">透過Firebase及時顯示燈狀態 </p>
-    <hr class="my-4">
-    <button class="btn btn-primary btn-lg state" id="btn">目前燈狀態:關</button>
+    <div class="jumbotron">
+        <h1 class="display-4">客廳燈狀態</h1>
+        <p class="lead">透過Firebase及時顯示燈狀態 </p>
+        <hr class="my-4">
+        <button class="btn btn-primary btn-lg state" id="btn">目前燈狀態:關</button>
+    </div>
 </div>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
