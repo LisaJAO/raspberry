@@ -1,3 +1,4 @@
+#http://stupidpythonideas.blogspot.com/2013/10/why-your-gui-app-freezes.html
 from gpiozero import RGBLED,Button
 from time import sleep
 from signal import pause
