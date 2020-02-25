@@ -9,7 +9,7 @@ def rgbListener(event):
 
 if __name__ == "__main__":
     cred = credentials.Certificate("/home/pi/Documents/certificate/raspberryfirebase-firebase-adminsdk-y4f0x-cf4be2ca1a.json")
-    firebase_admin.initialize_app(cred)
+    firebase_admin.initialize_app(cred,{'databaseURL':'https://raspberryfirebase.firebaseio.com/'})
     rgb = db.reference('iot20191126/RGBLed')
     rgb.listen(rgbListener)
     button = Button(18)
