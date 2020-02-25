@@ -6,10 +6,14 @@ from firebase_admin import db
 
 def rgbListener(event):
     print(event.data)
-
+    data = event.data
     if event.path == "/":
-        print('rgb')
+        r = data['R']
+        g = data['G']
+        b = data['B']
+        rgbLed.color = (r/100, g/100, b/100)
     elif event.path == "/R":
+        print(rgbLed.color)
         print('r change')
     elif event.path == "/G":
         print("g change")
@@ -20,9 +24,9 @@ if __name__ == "__main__":
     cred = credentials.Certificate("/home/pi/Documents/certificate/raspberryfirebase-firebase-adminsdk-y4f0x-cf4be2ca1a.json")
     firebase_admin.initialize_app(cred,{'databaseURL':'https://raspberryfirebase.firebaseio.com/'})
     rgb = db.reference('iot20191126/RGBLed')
-    rgb.listen(rgbListener)
     button = Button(18)
     rgbLed = RGBLED(17,27,22)
+    rgb.listen(rgbListener)
 
     while True:
         if button.is_pressed:
