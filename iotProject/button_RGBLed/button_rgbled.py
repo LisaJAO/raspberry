@@ -13,12 +13,11 @@ def rgbListener(event):
         b = data['B']
         rgbLed.color = (r/100, g/100, b/100)
     elif event.path == "/R":
-        print(rgbLed.color)
-        print('r change')
+        rgbLed.red = data/100
     elif event.path == "/G":
-        print("g change")
+        rgbLed.green = data / 100
     elif event.path == "/B":
-        print("b change")
+        rgbLed.blue = data/100
 
 if __name__ == "__main__":
     cred = credentials.Certificate("/home/pi/Documents/certificate/raspberryfirebase-firebase-adminsdk-y4f0x-cf4be2ca1a.json")
