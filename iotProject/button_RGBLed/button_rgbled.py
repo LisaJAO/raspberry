@@ -7,6 +7,15 @@ from firebase_admin import db
 def rgbListener(event):
     print(event.data)
 
+    if event.path == "/":
+        print('rgb')
+    elif event.path == "/R":
+        print('r change')
+    elif event.path == "/G":
+        print("g change")
+    elif event.path == "/B":
+        print("b change")
+
 if __name__ == "__main__":
     cred = credentials.Certificate("/home/pi/Documents/certificate/raspberryfirebase-firebase-adminsdk-y4f0x-cf4be2ca1a.json")
     firebase_admin.initialize_app(cred,{'databaseURL':'https://raspberryfirebase.firebaseio.com/'})
