@@ -136,10 +136,11 @@
     let $r = $('#r');
     let $g = $('#g');
     let $b = $('#b');
-    $(document).ready(function(){
+    database = firebase.database();
+    var rgbRef = database.ref("iot20191126/RGBLed");
+
+    $(document).ready(_ => {
         //realtimeDataBase
-        database = firebase.database();
-        var rgbRef = database.ref("iot20191126/RGBLed");
         rgbRef.on("value",snapshot => {
             rgbValue = snapshot.val();
             let rValue = rgbValue["R"];
@@ -158,18 +159,30 @@
         $('#displayMessage').change(eventObject => {
                 console.log(eventObject.target);
                 let targetObject = eventObject.target;
+                let value = $(targetObject).val();
                 switch(targetObject.id){
                     case "r":
                         console.log("r");
                         console.log($(targetObject).val());
+                        rgbRef.update({
+                            "R":Number(value)
+                        });
+                        $('#rBadge').text(value);
+
                         break;
                     case "g":
                         console.log("g");
-                        console.log($(targetObject).val());
+                        rgbRef.update({
+                            "G":Number(value)
+                        });
+                        $('#gBadge').text(value);
                         break;
                     case "b":
                         console.log("b");
-                        console.log($(targetObject).val());
+                        rgbRef.update({
+                            "B":Number(value)
+                        });
+                        $('#bBadge').text(value);
                         break;
                 }
         });
