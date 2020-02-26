@@ -58,10 +58,17 @@
         </div>
     </nav>
     <div class="jumbotron">
-        <h1 class="display-4">客廳燈狀態</h1>
-        <p class="lead">透過Firebase及時顯示燈狀態 </p>
+        <h1 class="display-4">RGBLED控制室</h1>
+        <p class="lead">透過Firebase及時控制RGBLED燈 </p>
         <hr class="my-4">
-
+        <label for="customRange2">紅色(R)</label>
+        <input type="range" class="custom-range" min="0" max="100" step="10" id="r">
+        <br>
+        <label for="customRange2">綠色(G)</label>
+        <input type="range" class="custom-range" min="0" max="100" step="10" id="g">
+        <br>
+        <label for="customRange2">藍色(B)</label>
+        <input type="range" class="custom-range" min="0" max="100" step="10" id="b">
     </div>
 </div>
 
@@ -70,10 +77,10 @@
 <script src="/__/firebase/7.9.1/firebase-app.js"></script>
 <script src="/__/firebase/init.js"></script>
 <script src="/__/firebase/7.9.1/firebase-database.js"></script>
-
-
+<script src="/__/firebase/7.9.1/firebase-auth.js"></script>
 
 <script>
+
 
 
 </script>
