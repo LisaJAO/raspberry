@@ -62,7 +62,7 @@
         <p class="lead">透過Firebase及時控制RGBLED燈 </p>
         <hr class="my-4">
 
-        <div class="container">
+        <div class="container" id="displayMessage">
             <div class="row">
                 <div class="col-9 col-md-8 col-sm-7">
                     <label for="r"></label>
@@ -154,9 +154,25 @@
             $('#bBadge').text(bValue);
         })
 
+        //range event listener
+        $('#displayMessage').change(eventObject => {
+                console.log(eventObject.target);
+                let targetObject = eventObject.target;
+                switch(targetObject.id){
+                    case "r":
+                        console.log("r");
+                        console.log($(targetObject).val());
+                        break;
+                    case "g":
+                        console.log("g");
+                        console.log($(targetObject).val());
+                        break;
+                    case "b":
+                        console.log("b");
+                        console.log($(targetObject).val());
+                        break;
+                }
+        });
     });
-
-
-
 </script>
 </html>
