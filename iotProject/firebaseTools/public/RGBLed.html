@@ -133,18 +133,22 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 <script>
-
+    let $r = $('#r');
+    let $g = $('#g');
+    let $b = $('#b');
     $(document).ready(function(){
         //realtimeDataBase
         database = firebase.database();
         var rgbRef = database.ref("iot20191126/RGBLed");
         rgbRef.on("value",snapshot => {
-
             rgbValue = snapshot.val();
             let rValue = rgbValue["R"];
             let gValue = rgbValue["G"];
             let bValue = rgbValue["B"];
             console.log("R", rValue, "G", gValue, "B", bValue);
+            $r.val(rValue);
+            $g.val(gValue);
+            $b.val(bValue);
         })
 
     });
