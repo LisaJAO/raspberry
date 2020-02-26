@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-3 col-md-4 col-sm-5 align-middle">
                     <button type="button" class="btn btn-danger">
-                        紅 <span class="badge badge-light">4</span>
+                        紅 <span class="badge badge-light" id="rBadge">4</span>
                     </button>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-3 col-md-4 col-sm-5 align-middle">
                     <button type="button" class="btn btn-success">
-                        綠 <span class="badge badge-light">4</span>
+                        綠 <span class="badge badge-light" id="gBadge">4</span>
                     </button>
                 </div>
 
@@ -95,7 +95,7 @@
                 </div>
                 <div class="col-3 col-md-4 col-sm-5 align-middle">
                     <button type="button" class="btn btn-primary ">
-                        藍 <span class="badge badge-light">4</span>
+                        藍 <span class="badge badge-light" id="bBadge">4</span>
                     </button>
                 </div>
 
@@ -149,6 +149,9 @@
             $r.val(rValue);
             $g.val(gValue);
             $b.val(bValue);
+            $('#rBadge').text(rValue);
+            $('#gBadge').text(gValue);
+            $('#bBadge').text(bValue);
         })
 
     });
