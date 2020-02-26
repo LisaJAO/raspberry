@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-3 col-md-4 col-sm-5 align-middle">
                     <button type="button" class="btn btn-danger">
-                        紅<span class="badge badge-light">4</span>
+                        紅 <span class="badge badge-light">4</span>
                     </button>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-3 col-md-4 col-sm-5 align-middle">
                     <button type="button" class="btn btn-success">
-                        綠<span class="badge badge-light">4</span>
+                        綠 <span class="badge badge-light">4</span>
                     </button>
                 </div>
 
@@ -95,7 +95,7 @@
                 </div>
                 <div class="col-3 col-md-4 col-sm-5 align-middle">
                     <button type="button" class="btn btn-primary ">
-                        藍<span class="badge badge-light">4</span>
+                        藍 <span class="badge badge-light">4</span>
                     </button>
                 </div>
 
@@ -108,6 +108,8 @@
     </div>
 </div>
 
+
+</body>
 <!-- Optional JavaScript -->
 <!--Firebase console-->
 <script src="/__/firebase/7.9.1/firebase-app.js"></script>
@@ -135,22 +137,19 @@
     $(document).ready(function(){
         //realtimeDataBase
         database = firebase.database();
-        var ledControl = database.ref("iot20191126/ledState");
-        ledControl.on("value",function (snapshot){
-            var $btnState = $("#btnState");
-            if(snapshot.val()){
-                $btnState.removeClass().addClass("btn-success").addClass("btn").addClass("btn-lg").addClass("state");
-                $btnState.text('目前燈狀態:開')
-            }else{
-                $btnState.removeClass().addClass("btn-danger").addClass("btn").addClass("btn-lg").addClass("state");
-                $btnState.text('目前燈狀態:關')
-            }
-        } );
+        var rgbRef = database.ref("iot20191126/RGBLed");
+        rgbRef.on("value",snapshot => {
+
+            rgbValue = snapshot.val();
+            let rValue = rgbValue["R"];
+            let gValue = rgbValue["G"];
+            let bValue = rgbValue["B"];
+            console.log("R", rValue, "G", gValue, "B", bValue);
+        })
 
     });
 
 
 
 </script>
-</body>
 </html>
