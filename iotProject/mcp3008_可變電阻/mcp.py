@@ -1,14 +1,16 @@
 #!/usr/bin/python3.7
 '''
-MCP3008 ,可變電阻
+MCP3008 , 可變電阻, pwmLed
 '''
 
 from gpiozero import MCP3008
 from tkinter import *
 from threading import Timer
+from gpiozero import PWMLED
 
 
 channel0 = MCP3008(0)
+led = PWMLED(18)
 
 class App():
     def __init__(self,win):
@@ -24,6 +26,7 @@ class App():
     def auotUpdate(self):
         print('update')
         outputValue = int(channel0.value * 100)
+        led.value = channel0.value
         self.displayValue.set(outputValue)
         try:
             Timer(0.2,self.auotUpdate).start()
