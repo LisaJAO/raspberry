@@ -10,8 +10,11 @@ channel0 = MCP3008(0)
 
 class App():
     def __init__(self,win):
+        #tkinter
         mainFrame = Frame(win,borderwidth=2,relief=GROOVE)
-
+        displayBar = Scale(mainFrame, from_=0, to=100, orient=HORIZONTAL,width=100)
+        displayBar.pack()
+        mainFrame.pack()
 
 if __name__ == '__main__':
     window = Tk()
