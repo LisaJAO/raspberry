@@ -23,14 +23,13 @@ class App():
 
     def auotUpdate(self):
         print('update')
-
         outputValue = int(channel0.value * 100)
         self.displayValue.set(outputValue)
         try:
-            Timer(0.2,self.auotUpdate()).start()
+            Timer(0.2,self.auotUpdate).start()
         except:
             print("error")
-            Timer(0.2, self.auotUpdate()).start()
+            Timer(0.2, self.auotUpdate).start()
 
 if __name__ == '__main__':
     window = Tk()
