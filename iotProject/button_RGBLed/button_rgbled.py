@@ -1,4 +1,3 @@
-
 from gpiozero import Button,RGBLED
 import firebase_admin
 from firebase_admin import credentials
