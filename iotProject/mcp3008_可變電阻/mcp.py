@@ -20,6 +20,7 @@ class App():
         #firebase realtimedataBase_PWM
         self.master = win
         self.job = None
+        self.outputValue = 0
         cred = credentials.Certificate('/home/pi/Documents/certificate/raspberryfirebase-firebase-adminsdk-y4f0x-cf4be2ca1a.json')
         firebase_admin.initialize_app(cred, {
             'databaseURL': 'https://raspberryfirebase.firebaseio.com/'
@@ -29,13 +30,13 @@ class App():
         #tkinter
         self.displayValue = IntVar()
         mainFrame = Frame(win,borderwidth=2,relief=GROOVE)
-        displayBar = Scale(mainFrame, from_=0, to=100, orient=HORIZONTAL, variable=self.displayValue,length=300,command=self.userCreateJob)
+        displayBar = Scale(mainFrame, from_=0, to=100, orient=HORIZONTAL, variable=self.displayValue,length=300)
         displayBar.pack()
         mainFrame.pack()
         self.displayValue.set(50)
         self.auotUpdate()
         
-    def userCreateJob(self,event):
+    def userCreateJob(self):
         print("userCreateJob")
         if self.job:
             self.master.after_cancel(self.job);        
@@ -48,6 +49,10 @@ class App():
     def auotUpdate(self):
         #print('update')
         outputValue = int(channel0.value * 100)
+        if self.outputValue != outputValue:
+            self.outputValue = outputValue
+            self.userCreateJob()
+            
         led.value = channel0.value
         self.displayValue.set(outputValue)
         try:
