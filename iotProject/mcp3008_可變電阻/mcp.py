@@ -7,6 +7,9 @@ from gpiozero import MCP3008
 from tkinter import *
 from threading import Timer
 from gpiozero import PWMLED
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
 
 
 channel0 = MCP3008(0)
@@ -14,6 +17,13 @@ led = PWMLED(18)
 
 class App():
     def __init__(self,win):
+        #firebase realtimedataBase_PWM
+        cred = credentials.Certificate('/home/pi/Documents/certificate/raspberryfirebase-firebase-adminsdk-y4f0x-cf4be2ca1a.json')
+        firebase_admin.initialize_app(cred, {
+            'databaseURL': 'https://raspberryfirebase.firebaseio.com/'
+        })
+        self.pwmRef = db.reference('iot20191126/PWM')
+        print(self.pwmRef)
         #tkinter
         self.displayValue = IntVar()
         mainFrame = Frame(win,borderwidth=2,relief=GROOVE)
@@ -24,7 +34,7 @@ class App():
         self.auotUpdate()
 
     def auotUpdate(self):
-        print('update')
+        #print('update')
         outputValue = int(channel0.value * 100)
         led.value = channel0.value
         self.displayValue.set(outputValue)
