@@ -1,6 +1,10 @@
 #!/usr/bin/python3.7
 '''
 MCP3008 , 可變電阻, pwmLed
+程式重點
+1程式每0.2秒會執行一次method
+2.只有可變電阻值改變時才會執行程式
+3.值快速連續改變非常多次時，只執行最後一次，這樣就可以最後一次才update firebase內的資料，而不是快速連續多次的更新
 '''
 
 from gpiozero import MCP3008
@@ -37,10 +41,11 @@ class App():
         self.auotUpdate()
         
     def userCreateJob(self):
+        #這裏的寫法是連續快速執行時，只執行最後一次
         print("userCreateJob")
         if self.job:
             self.master.after_cancel(self.job);        
-        self.job = self.master.after(100,self.firebaseDoSomeThing)
+        self.job = self.master.after(500,self.firebaseDoSomeThing)
     
     def firebaseDoSomeThing(self):
         print('doSomethine')
@@ -49,6 +54,7 @@ class App():
     def auotUpdate(self):
         #print('update')
         outputValue = int(channel0.value * 100)
+        #只有先前的值有改變，才會執行if內的程式
         if self.outputValue != outputValue:
             self.outputValue = outputValue
             self.userCreateJob()
@@ -61,7 +67,7 @@ class App():
             
         except:
             print("error")
-            Timer(1, self.auotUpdate).start()
+            Timer(0.2, self.auotUpdate).start()
 
 if __name__ == '__main__':
     window = Tk()
