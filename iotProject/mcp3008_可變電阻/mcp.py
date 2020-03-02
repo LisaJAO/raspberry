@@ -18,6 +18,7 @@ led = PWMLED(18)
 class App():
     def __init__(self,win):
         #firebase realtimedataBase_PWM
+        self.master = win
         cred = credentials.Certificate('/home/pi/Documents/certificate/raspberryfirebase-firebase-adminsdk-y4f0x-cf4be2ca1a.json')
         firebase_admin.initialize_app(cred, {
             'databaseURL': 'https://raspberryfirebase.firebaseio.com/'
@@ -32,6 +33,14 @@ class App():
         mainFrame.pack()
         self.displayValue.set(50)
         self.auotUpdate()
+        
+    def userCreateJob(self):
+        if self.job:
+            self.master.after_cancel(self.job);        
+        self.job = self.master.after(100,self.firebaseDoSomeThing)
+    
+    def firebaseDoSomeThing(self):
+        print('doSomethine')
 
     def auotUpdate(self):
         #print('update')
@@ -39,10 +48,16 @@ class App():
         led.value = channel0.value
         self.displayValue.set(outputValue)
         try:
-            Timer(0.2,self.auotUpdate).start()
+            Timer(1,self.auotUpdate).start()
+            #self.pwmRef.update({'value':outputValue})
+        except ValueError as valueError:
+            print("valueError:",valueError)
+
+        except FirebaseError as firebaseError:
+            print("firebaseError:",firebaseError)
         except:
             print("error")
-            Timer(0.2, self.auotUpdate).start()
+            Timer(1, self.auotUpdate).start()
 
 if __name__ == '__main__':
     window = Tk()
