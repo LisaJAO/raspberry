@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void user_click(View clickButton){
         Button btn = (Button) clickButton;
-        if(btn.getText().toString() == "OPEN"){
+        if(btn.getText().equals("OPEN") ){
             btn.setText("CLOSE");
         }else {
             btn.setText("OPEN");
