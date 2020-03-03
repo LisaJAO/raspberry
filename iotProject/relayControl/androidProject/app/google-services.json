@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "929629322713",
+    "firebase_url": "https://raspberryfirebase.firebaseio.com",
+    "project_id": "raspberryfirebase",
+    "storage_bucket": "raspberryfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929629322713:android:d8f74a2149d5cd288eedc8",
+        "android_client_info": {
+          "package_name": "com.roberthsu2003.raspberry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929629322713-7ru287ntmkn4mj1rmlmmfagdaon6khsm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_v3yAv0bB6elV-4NXa2Y9g9DLiRITb-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929629322713-7ru287ntmkn4mj1rmlmmfagdaon6khsm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
