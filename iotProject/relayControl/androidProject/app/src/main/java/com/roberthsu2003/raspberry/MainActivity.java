@@ -1,22 +1,49 @@
 package com.roberthsu2003.raspberry;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "RELAYTest";
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference relayRef = database.getReference("iot20191126/ledState");
+    private boolean relayCurrentState;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate");
+        relayRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                relayCurrentState = dataSnapshot.getValue(boolean.class);
+                Log.d(TAG, relayCurrentState ? "True": "False");
+                Button relayButton = (Button) findViewById(R.id.relayButton);
+
+                if (relayCurrentState) {
+                    relayButton.setText("CLOSE");
+                } else{
+                    relayButton.setText("OPEN");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -56,16 +83,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void user_click(View clickButton){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("iot20191126/message");
 
-        myRef.setValue("Hello, World!");
+
+        relayCurrentState = !relayCurrentState;
 
         Button btn = (Button) clickButton;
-        if(btn.getText().equals("OPEN") ){
+        if(relayCurrentState ){
             btn.setText("CLOSE");
+
         }else {
             btn.setText("OPEN");
         }
+        relayRef.setValue(relayCurrentState);
     }
 }
