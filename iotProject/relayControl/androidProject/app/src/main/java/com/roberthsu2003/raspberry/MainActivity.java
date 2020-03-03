@@ -3,6 +3,9 @@ package com.roberthsu2003.raspberry;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "RELAYTest";
@@ -47,5 +50,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG,"onDestroy()");
+    }
+
+    public void user_click(View clickButton){
+        Button btn = (Button) clickButton;
+        if(btn.getText() == "OPEN"){
+            btn.setText("CLOSE");
+        }else {
+            btn.setText("OPEN");
+        }
     }
 }
