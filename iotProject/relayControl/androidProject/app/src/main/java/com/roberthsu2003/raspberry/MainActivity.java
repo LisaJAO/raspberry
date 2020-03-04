@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,12 +30,12 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 relayCurrentState = dataSnapshot.getValue(boolean.class);
                 Log.d(TAG, relayCurrentState ? "True": "False");
-                Button relayButton = (Button) findViewById(R.id.relayButton);
+                ImageButton relayButton = (ImageButton) findViewById(R.id.relayButton);
 
                 if (relayCurrentState) {
-                    relayButton.setText("CLOSE");
+                    //relayButton.setText("CLOSE");
                 } else{
-                    relayButton.setText("OPEN");
+                    //relayButton.setText("OPEN");
                 }
 
             }
