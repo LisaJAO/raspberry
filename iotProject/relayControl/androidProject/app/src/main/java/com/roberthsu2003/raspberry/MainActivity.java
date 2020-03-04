@@ -34,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
                 if (relayCurrentState) {
                     //relayButton.setText("CLOSE");
+                    relayButton.setImageResource(R.drawable.open);
                 } else{
                     //relayButton.setText("OPEN");
+                    relayButton.setImageResource(R.drawable.close);
                 }
 
             }
@@ -88,12 +90,12 @@ public class MainActivity extends AppCompatActivity {
 
         relayCurrentState = !relayCurrentState;
 
-        Button btn = (Button) clickButton;
+        ImageButton btn = (ImageButton) clickButton;
         if(relayCurrentState ){
-            btn.setText("CLOSE");
+            btn.setImageResource(R.drawable.open);
 
         }else {
-            btn.setText("OPEN");
+            btn.setImageResource(R.drawable.close);
         }
         relayRef.setValue(relayCurrentState);
     }
