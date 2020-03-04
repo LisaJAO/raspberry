@@ -1,7 +1,7 @@
 #!/usr/bin/python3.7
 
 '''
-控制Led
+控制Relay
 '''
 from firebase_admin.exceptions import FirebaseError
 from gpiozero import LED
@@ -15,7 +15,7 @@ from firebase_admin import db
 class App:
     def __init__(self,window):
         #建立gpiozero led
-        self.red = LED(25)
+        self.red = LED(18)
 
 
         #建立window and Layout
