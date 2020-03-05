@@ -2,6 +2,8 @@ package com.roberthsu2003.raspberry;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -98,5 +100,10 @@ public class MainActivity extends AppCompatActivity {
             btn.setImageResource(R.drawable.close);
         }
         relayRef.setValue(relayCurrentState);
+    }
+
+    public void go_detail(View view) {
+        Intent deailIntent = new Intent(this, DetailActivity.class);
+        startActivity(deailIntent);
     }
 }
