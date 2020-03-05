@@ -7,7 +7,27 @@ import android.util.Log;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import org.w3c.dom.Text;
+@IgnoreExtraProperties
+class RGBLed{
+    public int R;
+    public int G;
+    public int B;
+
+    public RGBLed(){
+
+    }
+
+    public RGBLed(int r, int g, int b){
+        R = r;
+        G = g;
+        B = b;
+    }
+}
 
 public class MainActivity extends AppCompatActivity {
     private SeekBar rSeekBar;
@@ -16,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView rTextView;
     private TextView gTextView;
     private TextView bTextView;
+    private DatabaseReference rgbLedRef = FirebaseDatabase.getInstance().getReference("iot20191126/RGBLed");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         gTextView.setText("G:" + rSeekBar.getProgress());
         bTextView.setText("B:" + rSeekBar.getProgress());
         SeekBar.OnSeekBarChangeListener seekBarlistener = new SeekBar.OnSeekBarChangeListener() {
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
@@ -50,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
+
+
             }
 
             @Override
@@ -60,21 +84,26 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                RGBLed led = new RGBLed(MainActivity.this.rSeekBar.getProgress(), MainActivity.this.gSeekBar.getProgress(), MainActivity.this.bSeekBar.getProgress());
                 switch(seekBar.getId()){
                     case R.id.redBar:
-                        Log.d("SeekBar","red");
+                        led.R = seekBar.getProgress();
                         break;
                     case R.id.greenBar:
-                        Log.d("SeekBar","green");
+                        led.G = seekBar.getProgress();
                         break;
 
                     case R.id.blueBar:
-                        Log.d("SeekBar","blue");
+                        led.B = seekBar.getProgress();
                         break;
                     default:
                         break;
 
                 }
+
+                MainActivity.this.rgbLedRef.setValue(led);
+
+
 
             }
         };
