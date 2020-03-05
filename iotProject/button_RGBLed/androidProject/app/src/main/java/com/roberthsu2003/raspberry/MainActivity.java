@@ -24,8 +24,11 @@ public class MainActivity extends AppCompatActivity {
         gSeekBar = (SeekBar) findViewById(R.id.greenBar);
         bSeekBar = (SeekBar) findViewById(R.id.blueBar);
         rTextView = (TextView) findViewById(R.id.redTextView);
-        gTextView = (TextView) findViewById(R.id.GreenTextView);
+        gTextView = (TextView) findViewById(R.id.greenTextView);
         bTextView = (TextView) findViewById(R.id.blueTextView);
+        rTextView.setText("R:" + rSeekBar.getProgress());
+        gTextView.setText("G:" + rSeekBar.getProgress());
+        bTextView.setText("B:" + rSeekBar.getProgress());
 
     }
 }
