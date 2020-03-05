@@ -33,16 +33,17 @@ public class MainActivity extends AppCompatActivity {
         SeekBar.OnSeekBarChangeListener seekBarlistener = new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
                 switch(seekBar.getId()){
                     case R.id.redBar:
-                        Log.d("SeekBar","red");
+                        MainActivity.this.rTextView.setText("R:" + progress);
                         break;
                     case R.id.greenBar:
-                        Log.d("SeekBar","green");
+                        MainActivity.this.gTextView.setText("G:" + progress);
                         break;
 
                     case R.id.blueBar:
-                        Log.d("SeekBar","blue");
+                        MainActivity.this.bTextView.setText("B:" + progress);
                         break;
                     default:
                         break;
