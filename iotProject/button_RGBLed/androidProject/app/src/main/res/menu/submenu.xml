@@ -4,5 +4,6 @@
 
     <item
         android:id="@+id/sub1"
-        android:title="可變電阻" />
+        android:title="可變電阻"
+        app:showAsAction="never" />
 </menu>
