@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="40dp"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -16,23 +16,57 @@
         android:layout_weight="1"
         android:max="100"
         android:progress="60"
-        android:progressTint="@color/colorRed" />
+        android:progressTint="@color/colorRed"
+        android:thumbTint="@color/colorRed" />
+
+    <TextView
+        android:id="@+id/redTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:text="TextView" />
 
     <SeekBar
         android:id="@+id/greenBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:layout_weight="1"
         android:max="100"
         android:progress="60"
-        android:progressTint="@color/colorGreen" />
+        android:progressTint="@color/colorGreen"
+        android:thumbTint="@color/colorGreen" />
+
+    <TextView
+        android:id="@+id/GreenTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:text="TextView" />
+
 
     <SeekBar
         android:id="@+id/blueBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:layout_weight="1"
         android:max="100"
         android:progress="60"
-        android:progressTint="@color/colorBlue" />
+        android:progressTint="@color/colorBlue"
+        android:thumbTint="@color/colorBlue" />
+
+    <TextView
+        android:id="@+id/blueTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:text="TextView" />
+
+
+
+
 </LinearLayout>
