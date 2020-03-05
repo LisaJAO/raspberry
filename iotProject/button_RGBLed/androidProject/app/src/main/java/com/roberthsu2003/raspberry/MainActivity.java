@@ -1,5 +1,6 @@
 package com.roberthsu2003.raspberry;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -7,9 +8,12 @@ import android.util.Log;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 @IgnoreExtraProperties
@@ -110,6 +114,20 @@ public class MainActivity extends AppCompatActivity {
         rSeekBar.setOnSeekBarChangeListener(seekBarlistener);
         gSeekBar.setOnSeekBarChangeListener(seekBarlistener);
         bSeekBar.setOnSeekBarChangeListener(seekBarlistener);
+
+        ValueEventListener ledListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("firebase","dataChange");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+
+        rgbLedRef.addValueEventListener(ledListener);
 
     }
 }
