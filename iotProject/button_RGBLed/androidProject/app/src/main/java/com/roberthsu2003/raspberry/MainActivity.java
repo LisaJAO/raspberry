@@ -119,6 +119,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("firebase","dataChange");
+                RGBLed ledState = dataSnapshot.getValue(RGBLed.class);
+                MainActivity.this.rSeekBar.setProgress(ledState.R);
+                MainActivity.this.gSeekBar.setProgress(ledState.G);
+                MainActivity.this.bSeekBar.setProgress(ledState.B);
+                MainActivity.this.rTextView.setText("R:" + ledState.R);
+                MainActivity.this.gTextView.setText("G:" + ledState.G);
+                MainActivity.this.bTextView.setText("B:" + ledState.B);
             }
 
             @Override
