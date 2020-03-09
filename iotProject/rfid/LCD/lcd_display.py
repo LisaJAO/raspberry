@@ -1,4 +1,4 @@
-import i2c_lib
+from LCD import i2c_lib
 from time import sleep
 
 # LCD Address
