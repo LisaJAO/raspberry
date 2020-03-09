@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -43,6 +44,17 @@ public class MainActivity extends AppCompatActivity {
     private TextView gTextView;
     private TextView bTextView;
     private DatabaseReference rgbLedRef = FirebaseDatabase.getInstance().getReference("iot20191126/RGBLed");
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.sub1:
+                Log.d("optionItem","itemClick");
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,10 +156,5 @@ public class MainActivity extends AppCompatActivity {
         };
 
         rgbLedRef.addValueEventListener(ledListener);
-
-
-
-
-
     }
 }
