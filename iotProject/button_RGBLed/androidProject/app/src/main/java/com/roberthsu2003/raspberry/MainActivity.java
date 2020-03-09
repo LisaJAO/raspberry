@@ -3,6 +3,7 @@ package com.roberthsu2003.raspberry;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.sub1:
                 Log.d("optionItem","itemClick");
+                Intent intent = new Intent(this,Mcp3008.class);
+                startActivity(intent);
+                finish();
         }
 
 
