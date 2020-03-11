@@ -1,6 +1,7 @@
 package com.roberthsu2003.raspberry;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -10,7 +11,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -33,6 +37,30 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     Log.d("Firestore", "firestore read fails");
                 }
+            }
+        });
+
+
+
+        firestore.collection("Doors").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                if(e !=null){
+                    Log.d("listener","listener err",e);
+                    return;
+                }
+
+                for(DocumentChange dc:snapshots.getDocumentChanges()){
+                    switch(dc.getType()){
+                        case ADDED:
+                            Log.d("listener","add:" + dc.getDocument().getData());
+                        case REMOVED:
+                            Log.d("listener","removed:" + dc.getDocument().getData());
+                        case MODIFIED:
+                            Log.d("listener","modified:" + dc.getDocument().getData());
+                    }
+                }
+
             }
         });
     }
