@@ -68,6 +68,7 @@ public class MainActivity extends ListActivity {
     private FirebaseAuth mAuth;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     ArrayList<String> names = new ArrayList<String>();
+    ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,13 +107,13 @@ public class MainActivity extends ListActivity {
                         //Log.d("Firestore", document.getId() + " => " + document.getData());
                         //Record record = document.toObject(Record.class);
                         //records.add(record);
-                        Map<String, Object> oneItem = document.getData();
+                        //Map<String, Object> oneItem = document.getData();
                         //Log.d("Firestore",String.valueOf(oneItem.get("cardID")));
-                        names.add(String.valueOf(oneItem.get("cardID")));
+                        //names.add(String.valueOf(oneItem.get("cardID")));
                     }
 
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1, names);
-                    setListAdapter(adapter);
+                    MainActivity.this.adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1, names);
+                    setListAdapter(MainActivity.this.adapter);
 
 
                 }else{
@@ -139,12 +140,17 @@ public class MainActivity extends ListActivity {
                 for(DocumentChange dc:snapshots.getDocumentChanges()){
                     switch(dc.getType()){
                         case ADDED:
+                            Map<String, Object> oneItem = dc.getDocument().getData();
                             Log.d("listener","add:" + dc.getDocument().getData());
-
+                            names.add(String.valueOf(oneItem.get("cardID")));
+                            //MainActivity.this.adapter.notifyDataSetChanged();
+                            break;
                         case REMOVED:
                             Log.d("listener","removed:" + dc.getDocument().getData());
+                            break;
                         case MODIFIED:
                             Log.d("listener","modified:" + dc.getDocument().getData());
+                            break;
                     }
                 }
 
