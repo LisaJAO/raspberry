@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -30,6 +31,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import io.opencensus.resource.Resource;
 class RecordsAdapter extends ArrayAdapter<Record>{
@@ -52,10 +54,10 @@ class RecordsAdapter extends ArrayAdapter<Record>{
 class Record{
     public String cardID;
     public String date;
-    public long timestamp;
+    public Timestamp timestamp;
 
     public Record(){}
-    public Record(String cardID, String date, long timestamp){
+    public Record(String cardID, String date, Timestamp timestamp){
         this.cardID = cardID;
         this.date = date;
         this.timestamp = timestamp;
@@ -65,16 +67,16 @@ class Record{
 public class MainActivity extends ListActivity {
     private FirebaseAuth mAuth;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-    String[] names;
+    ArrayList<String> names = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
-
+        /*
         //getResource
         Resources res = getResources();
         names = res.getStringArray(R.array.userName);
-
+        */
 
         /*
         ArrayList<String> names = new ArrayList<String>();
@@ -85,9 +87,10 @@ public class MainActivity extends ListActivity {
         */
 
         //getListView
+        /*
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, names);
         setListAdapter(adapter);
-
+        */
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -98,23 +101,28 @@ public class MainActivity extends ListActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    /*
+
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("Firestore", document.getId() + " => " + document.getData());
-                        Record record = document.toObject(Record.class);
-                        records.add(record);
+                        //Log.d("Firestore", document.getId() + " => " + document.getData());
+                        //Record record = document.toObject(Record.class);
+                        //records.add(record);
+                        Map<String, Object> oneItem = document.getData();
+                        //Log.d("Firestore",String.valueOf(oneItem.get("cardID")));
+                        names.add(String.valueOf(oneItem.get("cardID")));
                     }
 
-                     */
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1, names);
+                    setListAdapter(adapter);
+
+
                 }else{
                     Log.d("Firestore", "firestore read fails");
                 }
-                /*
-                RecordsAdapter recordArrayAdapter = new RecordsAdapter(MainActivity.this,records);
 
-                MainActivity.this.setListAdapter(recordArrayAdapter);
+               // RecordsAdapter recordArrayAdapter = new RecordsAdapter(MainActivity.this,records);
+                //MainActivity.this.setListAdapter(recordArrayAdapter);
 
-                 */
+
             }
         });
 
@@ -132,6 +140,7 @@ public class MainActivity extends ListActivity {
                     switch(dc.getType()){
                         case ADDED:
                             Log.d("listener","add:" + dc.getDocument().getData());
+
                         case REMOVED:
                             Log.d("listener","removed:" + dc.getDocument().getData());
                         case MODIFIED:
