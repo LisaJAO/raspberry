@@ -92,7 +92,8 @@ public class MainActivity extends ListActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, names);
         setListAdapter(adapter);
         */
-
+        adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1, names);
+        setListAdapter(adapter);
 
         mAuth = FirebaseAuth.getInstance();
         //firestore get 30 pieces data
@@ -107,13 +108,12 @@ public class MainActivity extends ListActivity {
                         //Log.d("Firestore", document.getId() + " => " + document.getData());
                         //Record record = document.toObject(Record.class);
                         //records.add(record);
-                        //Map<String, Object> oneItem = document.getData();
+                        Map<String, Object> oneItem = document.getData();
                         //Log.d("Firestore",String.valueOf(oneItem.get("cardID")));
-                        //names.add(String.valueOf(oneItem.get("cardID")));
+                        names.add(String.valueOf(oneItem.get("cardID")));
                     }
 
-                    MainActivity.this.adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1, names);
-                    setListAdapter(MainActivity.this.adapter);
+                    //MainActivity.this.adapter.notifyDataSetChanged();
 
 
                 }else{
@@ -143,7 +143,7 @@ public class MainActivity extends ListActivity {
                             Map<String, Object> oneItem = dc.getDocument().getData();
                             Log.d("listener","add:" + dc.getDocument().getData());
                             names.add(String.valueOf(oneItem.get("cardID")));
-                            //MainActivity.this.adapter.notifyDataSetChanged();
+                            MainActivity.this.adapter.notifyDataSetChanged();
                             break;
                         case REMOVED:
                             Log.d("listener","removed:" + dc.getDocument().getData());
@@ -153,6 +153,8 @@ public class MainActivity extends ListActivity {
                             break;
                     }
                 }
+                //MainActivity.this.adapter.clear();
+                //MainActivity.this.adapter.addAll(names);
 
             }
         });
